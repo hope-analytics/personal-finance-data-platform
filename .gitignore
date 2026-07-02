@@ -1,0 +1,33 @@
+# Virtual Environment
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# Environment Variables
+.env
+
+# VSCode
+.vscode/
+
+# Data
+data/incoming/*
+data/processed/*
+data/quaratine/*
+data/test/*
+
+# Keep folders
+!data/incoming/.gitkeep
+!data/processed/.gitkeep
+!data/quaratine/.gitkeep
+!data/test/.gitkeep
+
+# Logs
+logs/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
