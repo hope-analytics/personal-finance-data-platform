@@ -25,7 +25,7 @@ The platform is designed around the following engineering goals:
 # High-Level Architecture
 
 ```
-Source Documents
+Source Artifacts
 (PDF, XLSX, CSV)
 
         │
@@ -54,7 +54,7 @@ Warehouse Layer
 Power BI
 ```
 
-The architecture follows an Extract–Load–Transform (ELT) approach. Source documents are parsed into structured records before being loaded into the Raw layer. Business transformations occur after the Raw layer has been populated.
+The architecture follows an Extract–Load–Transform (ELT) approach. Source artifacts are parsed into structured records before being loaded into the Raw layer. Business transformations occur after the Raw layer has been populated.
 
 ---
 
@@ -76,7 +76,7 @@ The platform currently consists of five logical schemas.
 
 ## Document Parsing
 
-Responsible for extracting structured records from supported source documents.
+Responsible for extracting structured records from supported source artifacts.
 
 The parser does not perform business transformations and does not communicate directly with downstream analytical layers.
 
@@ -86,7 +86,7 @@ The parser does not perform business transformations and does not communicate di
 
 Responsible for preserving extracted business data exactly as produced by the parser.
 
-The Raw layer represents the first structured representation of the source document and acts as the permanent audit layer for all downstream processing.
+The Raw layer represents the first structured representation of the source artifact and acts as the permanent audit layer for all downstream processing.
 
 Business transformations are not permitted within this layer.
 
@@ -176,7 +176,7 @@ Complete lineage is maintained throughout the platform.
 
 ## Reproducibility
 
-Given the same source document, parser version, and pipeline configuration, the platform must be capable of reproducing the same Raw dataset.
+Given the same source artifact, parser version, and pipeline configuration, the platform must be capable of reproducing the same Raw dataset.
 
 Parser improvements generate new pipeline executions rather than modifying existing Raw datasets.
 

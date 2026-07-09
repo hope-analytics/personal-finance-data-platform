@@ -187,6 +187,12 @@ The Raw layer therefore becomes the immutable foundation upon which every downst
 
 ---
 
+# Business Identity
+
+The Raw layer preserves transactions exactly as represented by the source artifact. It does not infer or construct business uniqueness when the source does not provide sufficient information to do so. Technical row identity and business identity are intentionally treated as separate concepts.
+
+---
+
 # Related Documents
 
 * `docs/project-blueprint.md`

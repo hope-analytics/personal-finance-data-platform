@@ -16,7 +16,7 @@ The database is designed around the principle that each layer has a single respo
 
 The platform follows an Extract–Load–Transform (ELT) architecture.
 
-Source documents are first parsed into structured records before being loaded into the Raw layer. Business transformations occur only after the Raw layer has been populated.
+Source artifact are first parsed into structured records before being loaded into the Raw layer. Business transformations occur only after the Raw layer has been populated.
 
 The database is designed to provide:
 
@@ -36,7 +36,7 @@ The platform is organized into five logical schemas.
 | --------- | --------------------------------------------------------------------------- |
 | metadata  | Operational metadata, execution history, pipeline monitoring, and auditing. |
 | config    | Pipeline configuration and future business rule configuration.              |
-| raw       | Immutable storage of structured data extracted from source documents.       |
+| raw       | Immutable storage of structured data extracted from source artifact.       |
 | staging   | Standardized, validated, and enriched business data.                        |
 | warehouse | Dimensional models optimized for reporting and analytics.                   |
 
@@ -47,7 +47,7 @@ Each schema owns a single responsibility and must not perform functions that bel
 # ELT Data Flow
 
 ```
-Source Documents
+source artifact
         │
         ▼
 Document Parsing
@@ -65,7 +65,7 @@ Warehouse Layer
 Power BI
 ```
 
-Document Parsing converts unstructured source documents into structured records.
+Document Parsing converts unstructured source artifact into structured records.
 
 The Raw layer stores those records exactly as extracted.
 
@@ -165,7 +165,7 @@ Downstream layers consume upstream data but never modify it.
 
 # Raw Layer Contract
 
-The Raw layer serves as the permanent landing layer for structured financial transactions extracted from supported source documents.
+The Raw layer serves as the permanent landing layer for structured financial transactions extracted from supported source artifact.
 
 ## Purpose
 
@@ -222,6 +222,24 @@ When a source document is reprocessed:
 
 This strategy preserves historical traceability while allowing parser improvements to be applied safely.
 
+## Source Artifact Lifecycle
+
+A source artifact is registered immediately when it is discovered by the ingestion pipeline, before parsing or validation begins.
+
+The purpose of registration is to establish a complete operational audit trail of every artifact encountered by the platform, regardless of its eventual processing outcome.
+
+A registered source artifact remains part of the platform's history whether processing:
+
+* completes successfully,
+* fails during parsing,
+* is rejected during validation, or
+* is intentionally reprocessed.
+
+Reprocessing does not create a new source artifact. Instead, it creates a new pipeline execution associated with the existing source artifact.
+
+The platform prevents duplicate source artifact registration according to its artifact uniqueness policy. The logical architecture requires duplicate registrations to be rejected; the physical implementation of uniqueness (such as filename, file hash, or a combination of both) will be determined during the physical database design.
+
+
 ---
 
 # Data Lineage
@@ -273,6 +291,10 @@ Every database object must satisfy the following principles.
 * Documentation Before Implementation
 * Data Contracts Before Physical Design
 
+## Business Uniqueness
+
+The Raw layer does not infer the business uniqueness of financial transactions unless the originating source artifact provides a stable business identifier. When the source cannot distinguish between repeated transactions and duplicate records, the platform preserves all transactions exactly as received.
+
 ---
 
 # Current Scope
@@ -290,3 +312,9 @@ This document currently defines:
 * Reproducibility
 
 Logical table definitions, physical database design, and SQL implementation will be documented after their respective design reviews have been completed.
+
+---
+
+# Glossary
+
+* **Source Artifact** - Any externally produced input accepted by the ingestion pipeline, such as PDF, XLSX, or future supported formats.
