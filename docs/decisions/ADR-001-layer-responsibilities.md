@@ -14,7 +14,7 @@ Accepted
 
 ## Context
 
-The Personal Finance Data Platform consists of multiple processing stages that transform financial data from source documents into analytical datasets.
+The Personal Finance Data Platform consists of multiple processing stages that transform financial data from source artifact into analytical datasets.
 
 Without clearly defined ownership, business logic can become duplicated across components, resulting in inconsistent processing, difficult maintenance, and reduced traceability.
 
@@ -36,13 +36,13 @@ No downstream layer may modify data owned by an upstream layer.
 
 # Layer Responsibilities
 
-## Document Parsing
+## Artifact Parsing
 
 **Responsibility**
 
-Convert supported source documents into structured transaction records.
+Convert supported source artifacts into structured transaction records.
 
-The parser extracts information from source documents without applying business transformations.
+The parser extracts information from source artifacts without applying business transformations.
 
 ---
 
@@ -66,7 +66,6 @@ Transform raw transactional data into standardized business data.
 
 Responsibilities include:
 
-* Data validation
 * Standardization
 * Normalization
 * Business rule application

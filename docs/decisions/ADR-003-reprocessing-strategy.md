@@ -14,7 +14,7 @@ Accepted
 
 ## Context
 
-As the platform evolves, parser improvements, defect fixes, and business requirements may require previously processed source documents to be processed again.
+As the platform evolves, parser improvements, defect fixes, and business requirements may require previously processed source artifacts to be processed again.
 
 Updating existing Raw records would compromise auditability, break reproducibility, and destroy historical processing information.
 
@@ -37,7 +37,7 @@ Historical executions and their associated datasets remain available for auditin
 # Reprocessing Lifecycle
 
 ```
-Source Document
+Source Artifact
 
         │
 
@@ -112,7 +112,7 @@ The additional storage required is negligible compared to the value of maintaini
 
 ## Trade-offs
 
-* Multiple processing executions may exist for the same source document.
+* Multiple processing executions may exist for the same source artifact.
 * Metadata management becomes responsible for determining which execution downstream processing should use.
 * Additional storage is required for historical datasets.
 

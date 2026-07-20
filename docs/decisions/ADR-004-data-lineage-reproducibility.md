@@ -34,11 +34,11 @@ The platform therefore requires a formal strategy for preserving traceability ac
 
 The platform adopts end-to-end data lineage and deterministic processing as fundamental architectural principles.
 
-Every dataset must be traceable to its immediate upstream dataset, ultimately leading back to the original source document.
+Every dataset must be traceable to its immediate upstream dataset, ultimately leading back to the original source artifact.
 
 Processing must be reproducible when executed using the same:
 
-* Source document
+* Source artifact
 * Parser version
 * Pipeline configuration
 
@@ -79,7 +79,7 @@ The platform must be capable of producing identical Raw datasets when provided w
 
 Reproducibility requires:
 
-* The same source document.
+* The same source artifact.
 * The same parser version.
 * The same pipeline configuration.
 

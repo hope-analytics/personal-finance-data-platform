@@ -31,7 +31,7 @@ Source Artifacts
         │
         ▼
 
-Document Parsing
+Artifact Parsing
 
         │
         ▼
@@ -74,7 +74,7 @@ The platform currently consists of five logical schemas.
 
 # Layer Responsibilities
 
-## Document Parsing
+## Artifact Parsing
 
 Responsible for extracting structured records from supported source artifacts.
 
@@ -94,7 +94,7 @@ Business transformations are not permitted within this layer.
 
 ## Staging Layer
 
-Responsible for standardizing, validating, and enriching raw data into a consistent business representation.
+Responsible for transforming accepted Raw datasets into standardized business datasets through standardization, normalization, business rule application, and operational enrichment.
 
 Business rules belong exclusively to this layer.
 
@@ -167,7 +167,7 @@ Corrections and improvements are achieved through reprocessing rather than updat
 Every analytical record must be traceable back to:
 
 * Pipeline execution
-* Source file
+* Source artifact
 * Raw record
 
 Complete lineage is maintained throughout the platform.
@@ -188,7 +188,7 @@ Each architectural layer has exactly one producer.
 
 | Layer            | Owner                   |
 | ---------------- | ----------------------- |
-| Document Parsing | Parser                  |
+| Artifact Parsing | Parser                  |
 | Raw              | Ingestion Pipeline      |
 | Staging          | Transformation Pipeline |
 | Warehouse        | Warehouse Load Pipeline |
@@ -215,6 +215,7 @@ Project documentation is organized according to responsibility.
 | Document             | Responsibility                                   |
 | -------------------- | ------------------------------------------------ |
 | project-blueprint.md | Current approved architecture and project state. |
+| contracts.md | Defines the Platform Contracts that govern the Personal Finance Data Platform. Platform Contracts establish authoritative architectural responsibilities and minimum platform representations that all architectural components and implementations must satisfy. |
 | architecture.md      | System architecture and component interactions.  |
 | database.md          | Database architecture and data contracts.        |
 | development.md       | Engineering standards and development workflow.  |

@@ -16,7 +16,7 @@ Accepted
 
 The Raw layer is the foundation of the Personal Finance Data Platform.
 
-It serves as the permanent landing layer for structured financial transactions extracted from supported source documents.
+It serves as the permanent landing layer for structured financial transactions extracted from supported source artifacts.
 
 Without a clearly defined contract, business transformations can gradually migrate into the Raw layer, reducing auditability, complicating debugging, and making historical reprocessing unreliable.
 
@@ -26,7 +26,7 @@ To prevent architectural drift, the responsibilities and constraints of the Raw 
 
 # Decision
 
-The Raw layer shall preserve the first structured representation of financial transactions exactly as produced by the document parser.
+The Raw layer shall preserve the first structured representation of financial transactions exactly as produced by the artifact parser.
 
 The Raw layer is immutable and serves as the authoritative audit record for all downstream processing.
 
@@ -44,7 +44,7 @@ The Raw layer represents the earliest structured dataset within the platform.
 
 # Grain
 
-One row represents one financial transaction extracted from one source document.
+One row represents one financial transaction extracted from one source artifact.
 
 Each transaction is stored independently.
 
@@ -64,7 +64,7 @@ Downstream layers consume Raw data but never modify it.
 
 The Raw layer may contain:
 
-* Business attributes extracted directly from the source document.
+* Business attributes extracted directly from the source artifact.
 * Technical metadata required for ingestion.
 * Technical metadata required for auditing.
 * Technical metadata required for data lineage.
@@ -131,7 +131,7 @@ Downstream processing consumes the authoritative pipeline execution designated b
 
 Every Raw record must be traceable to:
 
-* Source document
+* Source artifact
 * Parser
 * Pipeline execution
 
@@ -143,7 +143,7 @@ The Raw layer forms the beginning of the platform's end-to-end lineage.
 
 Given:
 
-* The same source document
+* The same source artifact
 * The same parser version
 * The same pipeline configuration
 
